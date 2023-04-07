@@ -113,34 +113,34 @@ type Message struct {
 }
 
 type Chat struct {
-	Id                                      int
-	Type                                    string
-	Title                                   string
-	Username                                string
-	First_name                              string
-	Last_name                               string
-	Is_forum                                bool
-	Photo                                   *ChatPhoto
-	Active_usernames                        []string
-	Emoji_status_custom_emoji_id            string
-	Bio                                     string
-	Has_private_forwards                    bool
-	Has_restricted_voice_and_video_messages bool
-	Join_to_send_messages                   bool
-	Join_by_request                         bool
-	Description                             string
-	Invite_link                             string
-	Pinned_message                          *Message
-	Permissions                             *ChatPermissions
-	Slow_mode_delay                         int
-	Message_auto_delete_time                int
-	Has_aggressive_anti_spam_enabled        bool
-	Has_hidden_members                      bool
-	Has_protected_content                   bool
-	Sticker_set_name                        string
-	Can_set_sticker_set                     bool
-	Linked_chat_id                          int
-	Location                                *ChatLocation
+	Id                                      int              `json:"id"`
+	Type                                    string           `json:"type"`
+	Title                                   string           `json:"title,omitempty"`
+	Username                                string           `json:"username,omitempty"`
+	First_name                              string           `json:"first_name,omitempty"`
+	Last_name                               string           `json:"last_name,omitempty"`
+	Is_forum                                bool             `json:"is_forum,omitempty"`
+	Photo                                   *ChatPhoto       `json:"photo,omitempty"`
+	Active_usernames                        []string         `json:"active_usernames,omitempty"`
+	Emoji_status_custom_emoji_id            string           `json:"emoji_status_custom_emoji_id,omitempty"`
+	Bio                                     string           `json:"bio,omitempty"`
+	Has_private_forwards                    bool             `json:"has_private_forwards,omitempty"`
+	Has_restricted_voice_and_video_messages bool             `json:"has_restricted_voice_and_video_messages,omitempty"`
+	Join_to_send_messages                   bool             `json:"join_to_send_messages,omitempty"`
+	Join_by_request                         bool             `json:"join_by_request,omitempty"`
+	Description                             string           `json:"description,omitempty"`
+	Invite_link                             string           `json:"invite_link,omitempty"`
+	Pinned_message                          *Message         `json:"pinned_message,omitempty"`
+	Permissions                             *ChatPermissions `json:"permissions,omitempty"`
+	Slow_mode_delay                         int              `json:"slow_mode_delay,omitempty"`
+	Message_auto_delete_time                int              `json:"message_auto_delete_time,omitempty"`
+	Has_aggressive_anti_spam_enabled        bool             `json:"has_aggressive_anti_spam_enabled,omitempty"`
+	Has_hidden_members                      bool             `json:"has_hidden_members,omitempty"`
+	Has_protected_content                   bool             `json:"has_protected_content,omitempty"`
+	Sticker_set_name                        string           `json:"sticker_set_name,omitempty"`
+	Can_set_sticker_set                     bool             `json:"can_set_sticker_set,omitempty"`
+	Linked_chat_id                          int              `json:"linked_chat_id,omitempty"`
+	Location                                *ChatLocation    `json:"location,omitempty"`
 }
 
 type InlineQuery struct {
