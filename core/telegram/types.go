@@ -220,8 +220,8 @@ type Poll struct {
 }
 
 type PollOption struct {
-	Text        string
-	Voter_count int
+	Text        string `json:"text"`
+	Voter_count int    `json:"voter_count"`
 }
 
 type PollAnswer struct {
