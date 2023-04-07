@@ -161,13 +161,13 @@ type ChosenInlineResult struct {
 }
 
 type CallbackQuery struct {
-	Id                string
-	From              *User
-	Message           *Message
-	Inline_message_id string
-	Chat_instance     string
-	Data              string
-	Game_short_name   string
+	Id                string   `json:"id"`
+	From              *User    `json:"from"`
+	Message           *Message `json:"message,omitempty"`
+	Inline_message_id string   `json:"inline_message_id,omitempty"`
+	Chat_instance     string   `json:"chat_instance"`
+	Data              string   `json:"data,omitempty"`
+	Game_short_name   string   `json:"game_short_name,omitempty"`
 }
 
 type ShippingQuery struct {
