@@ -152,7 +152,13 @@ type InlineQuery struct {
 	Location  *Location `json:"location,omitempty"`
 }
 
-type ChosenInlineResult struct{}
+type ChosenInlineResult struct {
+	Result_id         string    `json:"result_id"`
+	From              *User     `json:"from"`
+	Location          *Location `json:"location,omitempty"`
+	Inline_message_id string    `json:"inline_message_id,omitempty"`
+	Query             string    `json:"query,omitempty"`
+}
 
 type CallbackQuery struct {
 	Id                string
