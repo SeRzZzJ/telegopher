@@ -144,12 +144,12 @@ type Chat struct {
 }
 
 type InlineQuery struct {
-	Id        string
-	From      *User
-	Query     string
-	Offset    string
-	Chat_type string
-	Location  *Location
+	Id        string    `json:"id"`
+	From      *User     `json:"from"`
+	Query     string    `json:"query"`
+	Offset    string    `json:"offset"`
+	Chat_type string    `json:"chat_type,omitempty"`
+	Location  *Location `json:"location,omitempty"`
 }
 
 type ChosenInlineResult struct{}
