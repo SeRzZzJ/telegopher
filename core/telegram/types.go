@@ -185,12 +185,12 @@ type OrderInfo struct {
 }
 
 type ShippingAddress struct {
-	Country_code string
-	State        string
-	City         string
-	Street_line1 string
-	Street_line2 string
-	Post_code    string
+	Country_code string `json:"country_code"`
+	State        string `json:"state"`
+	City         string `json:"city"`
+	Street_line1 string `json:"street_line1"`
+	Street_line2 string `json:"street_line2"`
+	Post_code    string `json:"post_code"`
 }
 
 type PreCheckoutQuery struct {
