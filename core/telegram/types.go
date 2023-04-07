@@ -178,10 +178,10 @@ type ShippingQuery struct {
 }
 
 type OrderInfo struct {
-	Name             string
-	Phone_number     string
-	Email            string
-	Shipping_address *ShippingAddress
+	Name             string           `json:"name,omitempty"`
+	Phone_number     string           `json:"phone_number,omitempty"`
+	Email            string           `json:"email,omitempty"`
+	Shipping_address *ShippingAddress `json:"shipping_address,omitempty"`
 }
 
 type ShippingAddress struct {
