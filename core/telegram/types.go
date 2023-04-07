@@ -264,13 +264,13 @@ type ChatJoinRequest struct {
 }
 
 type MessageEntity struct {
-	Type            string
-	Offset          int
-	Length          int
-	Url             string
-	User            *User
-	Language        string
-	Custom_emoji_id int
+	Type            string `json:"type"`
+	Offset          int    `json:"offset"`
+	Length          int    `json:"length"`
+	Url             string `json:"url,omitempty"`
+	User            *User  `json:"user,omitempty"`
+	Language        string `json:"language,omitempty"`
+	Custom_emoji_id int    `json:"custom_emoji_id,omitempty"`
 }
 
 type Animation struct{}
