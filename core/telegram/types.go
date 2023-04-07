@@ -204,19 +204,19 @@ type PreCheckoutQuery struct {
 }
 
 type Poll struct {
-	Id                      string
-	Question                string
-	Options                 *[]PollOption
-	Total_voter_count       int
-	Is_closed               bool
-	Is_anonymous            bool
-	Type                    string
-	Allows_multiple_answers bool
-	Correct_option_id       int
-	Explanation             string
-	Explanation_entities    *[]MessageEntity
-	Open_period             int
-	Close_date              int
+	Id                      string           `json:"id"`
+	Question                string           `json:"question"`
+	Options                 *[]PollOption    `json:"options"`
+	Total_voter_count       int              `json:"total_voter_count"`
+	Is_closed               bool             `json:"is_closed"`
+	Is_anonymous            bool             `json:"is_anonymous"`
+	Type                    string           `json:"type"`
+	Allows_multiple_answers bool             `json:"allows_multiple_answers"`
+	Correct_option_id       int              `json:"correct_option_id,omitempty"`
+	Explanation             string           `json:"explanation,omitempty"`
+	Explanation_entities    *[]MessageEntity `json:"explanation_entities,omitempty"`
+	Open_period             int              `json:"open_period,omitempty"`
+	Close_date              int              `json:"close_date,omitempty"`
 }
 
 type PollOption struct {
