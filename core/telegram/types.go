@@ -171,13 +171,10 @@ type CallbackQuery struct {
 }
 
 type ShippingQuery struct {
-	Id                 string
-	From               *User
-	Currency           string
-	Total_amount       int
-	Invoice_payload    string
-	Shipping_option_id string
-	Order_info         *OrderInfo
+	Id               string           `json:"id"`
+	From             *User            `json:"from"`
+	Invoice_payload  string           `json:"invoice_payload"`
+	Shipping_address *ShippingAddress `json:"shipping_address"`
 }
 
 type OrderInfo struct {
