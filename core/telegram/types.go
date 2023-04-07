@@ -194,13 +194,13 @@ type ShippingAddress struct {
 }
 
 type PreCheckoutQuery struct {
-	Id                 string
-	From               *User
-	Currency           string
-	Total_amount       int
-	Invoice_payload    string
-	Shipping_option_id string
-	Order_info         *OrderInfo
+	Id                 string     `json:"id"`
+	From               *User      `json:"from"`
+	Currency           string     `json:"currency"`
+	Total_amount       int        `json:"total_amount"`
+	Invoice_payload    string     `json:"invoice_payload"`
+	Shipping_option_id string     `json:"shipping_option_id,omitempty"`
+	Order_info         *OrderInfo `json:"order_info,omitempty"`
 }
 
 type Poll struct {
