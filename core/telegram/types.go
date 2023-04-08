@@ -271,15 +271,15 @@ type ChatMember struct {
 }
 
 type ChatInviteLink struct {
-	Invite_link                string
-	Creator                    *User
-	Creates_join_request       bool
-	Is_primary                 bool
-	Is_revoked                 bool
-	Name                       string
-	Expire_date                int
-	Member_limit               int
-	Pending_join_request_count int
+	Invite_link                string `json:"invite_link"`
+	Creator                    *User  `json:"creator"`
+	Creates_join_request       bool   `json:"creates_join_request"`
+	Is_primary                 bool   `json:"is_primary"`
+	Is_revoked                 bool   `json:"is_revoked"`
+	Name                       string `json:"name,omitempty"`
+	Expire_date                int    `json:"expire_date,omitempty"`
+	Member_limit               int    `json:"member_limit,omitempty"`
+	Pending_join_request_count int    `json:"pending_join_request_count,omitempty"`
 }
 
 type ChatJoinRequest struct {
