@@ -231,12 +231,12 @@ type PollAnswer struct {
 }
 
 type ChatMemberUpdated struct {
-	Chat            *Chat
-	From            *User
-	Date            int
-	Old_chat_member *ChatMember
-	New_chat_member *ChatMember
-	Invite_link     *ChatInviteLink
+	Chat            *Chat           `json:"chat"`
+	From            *User           `json:"from"`
+	Date            int             `json:"date"`
+	Old_chat_member *ChatMember     `json:"old_chat_member"`
+	New_chat_member *ChatMember     `json:"new_chat_member"`
+	Invite_link     *ChatInviteLink `json:"invite_link,omitempty"`
 }
 
 type ChatMember struct {
