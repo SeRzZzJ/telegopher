@@ -283,12 +283,12 @@ type ChatInviteLink struct {
 }
 
 type ChatJoinRequest struct {
-	Chat         *Chat
-	From         *User
-	User_chat_id int
-	Date         int
-	Bio          string
-	Invite_link  *ChatInviteLink
+	Chat         *Chat           `json:"chat"`
+	From         *User           `json:"from"`
+	User_chat_id int             `json:"user_chat_id"`
+	Date         int             `json:"date"`
+	Bio          string          `json:"bio,omitempty"`
+	Invite_link  *ChatInviteLink `json:"invite_link,omitempty"`
 }
 
 type MessageEntity struct {
