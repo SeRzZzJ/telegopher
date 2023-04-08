@@ -225,9 +225,9 @@ type PollOption struct {
 }
 
 type PollAnswer struct {
-	Poll_id    string `json:"poll_id,omitempty"`
-	User       *User  `json:"user,omitempty"`
-	Option_ids []int  `json:"option_ids,omitempty"`
+	Poll_id    string `json:"poll_id"`
+	User       *User  `json:"user"`
+	Option_ids []int  `json:"option_ids"`
 }
 
 type ChatMemberUpdated struct {
