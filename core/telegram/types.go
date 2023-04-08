@@ -240,6 +240,34 @@ type ChatMemberUpdated struct {
 }
 
 type ChatMember struct {
+	Status                    string `json:"status"`
+	User                      *User  `json:"user"`
+	Is_anonymous              bool   `json:"is_anonymous,omitempty"`
+	Custom_title              string `json:"custom_title,omitempty"`
+	Can_be_edited             bool   `json:"can_be_edited,omitempty"`
+	Can_manage_chat           bool   `json:"can_manage_chat,omitempty"`
+	Can_delete_messages       bool   `json:"can_delete_messages,omitempty"`
+	Can_manage_video_chats    bool   `json:"can_manage_video_chats,omitempty"`
+	Can_restrict_members      bool   `json:"can_restrict_members,omitempty"`
+	Can_promote_members       bool   `json:"can_promote_members,omitempty"`
+	Can_change_info           bool   `json:"can_change_info,omitempty"`
+	Can_invite_users          bool   `json:"can_invite_users,omitempty"`
+	Can_post_messages         bool   `json:"can_post_messages,omitempty"`
+	Can_edit_messages         bool   `json:"can_edit_messages,omitempty"`
+	Can_pin_messages          bool   `json:"can_pin_messages,omitempty"`
+	Can_manage_messages       bool   `json:"can_manage_messages,omitempty"`
+	Can_send_messages         bool   `json:"can_send_messages,omitempty"`
+	Can_send_audios           bool   `json:"can_send_audios,omitempty"`
+	Can_send_documents        bool   `json:"can_send_documents,omitempty"`
+	Can_send_photos           bool   `json:"can_send_photos,omitempty"`
+	Can_send_videos           bool   `json:"can_send_videos,omitempty"`
+	Can_send_video_notes      bool   `json:"can_send_video_notes,omitempty"`
+	Can_send_voice_notes      bool   `json:"can_send_voice_notes,omitempty"`
+	Can_send_polls            bool   `json:"can_send_polls,omitempty"`
+	Can_send_other_messages   bool   `json:"can_send_other_messages,omitempty"`
+	Can_add_web_page_previews bool   `json:"can_add_web_page_previews,omitempty"`
+	Can_manage_topics         bool   `json:"can_manage_topics,omitempty"`
+	Until_date                int    `json:"until_date,omitempty"`
 }
 
 type ChatInviteLink struct {
