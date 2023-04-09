@@ -301,19 +301,73 @@ type MessageEntity struct {
 	Custom_emoji_id int    `json:"custom_emoji_id,omitempty"`
 }
 
-type Animation struct{}
+type Animation struct {
+	File_id        string     `json:"file_id"`
+	File_unique_id string     `json:"file_unique_id"`
+	Width          int        `json:"width"`
+	Height         int        `json:"height"`
+	Duration       int        `json:"duration"`
+	Thumbnail      *PhotoSize `json:"thumbnail,omitempty"`
+	File_name      string     `json:"file_name,omitempty"`
+	Mime_type      string     `json:"mime_type,omitempty"`
+	File_size      int        `json:"file_size,omitempty"`
+}
 
-type Audio struct{}
+type Audio struct {
+	File_id        string `json:"file_id"`
+	File_unique_id string `json:"file_unique_id"`
+	Duration       int    `json:"duration"`
+	Performer      string `json:"performer,omitempty"`
+	Title          string `json:"title,omitempty"`
+	File_name      string `json:"file_name,omitempty"`
+	Mime_type      string `json:"mime_type,omitempty"`
+	File_size      int    `json:"file_size,omitempty"`
+}
 
-type Document struct{}
+type Document struct {
+	File_id        string     `json:"file_id"`
+	File_unique_id string     `json:"file_unique_id"`
+	Thumbnail      *PhotoSize `json:"thumbnail,omitempty"`
+	File_name      string     `json:"file_name,omitempty"`
+	Mime_type      string     `json:"mime_type,omitempty"`
+	File_size      int        `json:"file_size,omitempty"`
+}
 
-type PhotoSize struct{}
+type PhotoSize struct {
+	File_id        string `json:"file_id"`
+	File_unique_id string `json:"file_unique_id"`
+	Width          int    `json:"width"`
+	File_size      int    `json:"file_size,omitempty"`
+}
 
-type Video struct{}
+type Video struct {
+	File_id        string     `json:"file_id"`
+	File_unique_id string     `json:"file_unique_id"`
+	Width          int        `json:"width"`
+	Height         int        `json:"height"`
+	Duration       int        `json:"duration"`
+	Thumbnail      *PhotoSize `json:"thumbnail,omitempty"`
+	File_name      string     `json:"file_name,omitempty"`
+	Mime_type      string     `json:"mime_type,omitempty"`
+	File_size      int        `json:"file_size,omitempty"`
+}
 
-type VideoNote struct{}
+type VideoNote struct {
+	File_id        string     `json:"file_id"`
+	File_unique_id string     `json:"file_unique_id"`
+	Length         int        `json:"lenght"`
+	Duration       int        `json:"duration"`
+	Thumbnail      *PhotoSize `json:"thumbnail,omitempty"`
+	File_size      int        `json:"file_size,omitempty"`
+}
 
-type Voice struct{}
+type Voice struct {
+	File_id        string `json:"file_id"`
+	File_unique_id string `json:"file_unique_id"`
+	Duration       int    `json:"duration"`
+	Mime_type      string `json:"mime_type,omitempty"`
+	File_size      int    `json:"file_size,omitempty"`
+}
 
 type Contact struct{}
 
