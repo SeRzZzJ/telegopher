@@ -423,7 +423,15 @@ type MaskPosition struct {
 	Scale   float64 `json:"scale"`
 }
 
-type Venue struct{}
+type Venue struct {
+	Location          *Location `json:"location"`
+	Title             string    `json:"title"`
+	Address           string    `json:"address"`
+	Foursquare_id     string    `json:"foursquare_id,omitempty"`
+	Foursquare_type   string    `json:"foursquare_type,omitempty"`
+	Google_place_id   string    `json:"google_place_id,omitempty"`
+	Google_place_type string    `json:"google_place_type,omitempty"`
+}
 
 type Location struct{}
 
