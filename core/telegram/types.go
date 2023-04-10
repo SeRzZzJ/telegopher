@@ -450,7 +450,15 @@ type Invoice struct {
 	Total_amount    int    `json:"total_amount"`
 }
 
-type SuccessfulPayment struct{}
+type SuccessfulPayment struct {
+	Currency                   string     `json:"currency"`
+	Total_amount               int        `json:"total_amount"`
+	Invoice_payload            string     `json:"invoice_payload"`
+	Shipping_option_id         string     `json:"shipping_option_id,omitempty"`
+	Order_info                 *OrderInfo `json:"order_info,omitempty"`
+	Telegram_payment_charge_id string     `json:"telegram_payment_charge_id"`
+	Provider_payment_charge_id string     `json:"provider_payment_charge_id"`
+}
 
 type UserShared struct{}
 
