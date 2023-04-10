@@ -534,7 +534,9 @@ type VideoChatScheduled struct {
 
 type VideoChatStarted struct{}
 
-type VideoChatEnded struct{}
+type VideoChatEnded struct {
+	Duration int `json:"duration"`
+}
 
 type VideoChatParticipantsInvited struct{}
 
