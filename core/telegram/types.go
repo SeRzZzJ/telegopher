@@ -442,7 +442,13 @@ type Location struct {
 	Proximity_alert_radius int     `json:"proximity_alert_radius,omitempty"`
 }
 
-type Invoice struct{}
+type Invoice struct {
+	Title           string `json:"title"`
+	Description     string `json:"description"`
+	Start_parameter string `json:"start_parameter"`
+	Currency        string `json:"currency"`
+	Total_amount    int    `json:"total_amount"`
+}
 
 type SuccessfulPayment struct{}
 
