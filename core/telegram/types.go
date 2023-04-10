@@ -538,7 +538,9 @@ type VideoChatEnded struct {
 	Duration int `json:"duration"`
 }
 
-type VideoChatParticipantsInvited struct{}
+type VideoChatParticipantsInvited struct {
+	Users []*User `json:"users"`
+}
 
 type WebAppData struct{}
 
