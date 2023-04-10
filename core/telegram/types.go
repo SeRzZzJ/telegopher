@@ -547,7 +547,11 @@ type WebAppData struct {
 	Button_text string `json:"button_text"`
 }
 
-type InlineKeyboardMarkup struct{}
+type InlineKeyboardMarkup struct {
+	Inline_keyboard []*InlineKeyboardButton `json:"inline_keyboard"`
+}
+
+type InlineKeyboardButton struct{}
 
 type ChatLocation struct{}
 
