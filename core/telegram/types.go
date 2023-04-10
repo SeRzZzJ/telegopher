@@ -460,7 +460,10 @@ type SuccessfulPayment struct {
 	Provider_payment_charge_id string     `json:"provider_payment_charge_id"`
 }
 
-type UserShared struct{}
+type UserShared struct {
+	Request_id int `json:"request_id"`
+	User_id    int `json:"user_id"`
+}
 
 type ChatShared struct{}
 
