@@ -477,7 +477,20 @@ type PassportData struct {
 	Credentials *EncryptedCredentials       `json:"credentials"`
 }
 
-type EncryptedPassportElement struct{}
+type EncryptedPassportElement struct {
+	Type         string          `json:"type"`
+	Data         string          `json:"data"`
+	Phone_number string          `json:"phone_number,omitempty"`
+	Email        string          `json:"email,omitempty"`
+	Files        []*PassportFile `json:"files,omitempty"`
+	Front_side   *PassportFile   `json:"front_side,omitempty"`
+	Reverse_side *PassportFile   `json:"reverse_side,omitempty"`
+	Sefile       *PassportFile   `json:"sefile,omitempty"`
+	Translation  []*PassportFile `json:"translation,omitempty"`
+	Hash         string          `json:"hash"`
+}
+
+type PassportFile struct{}
 
 type EncryptedCredentials struct{}
 
