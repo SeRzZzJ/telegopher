@@ -497,7 +497,11 @@ type PassportFile struct {
 	File_date      int    `json:"file_date"`
 }
 
-type EncryptedCredentials struct{}
+type EncryptedCredentials struct {
+	Data   string `json:"data"`
+	Hash   string `json:"hash"`
+	Secret string `json:"secret"`
+}
 
 type ProximityAlertTriggered struct{}
 
