@@ -509,7 +509,11 @@ type ProximityAlertTriggered struct {
 	Distance int   `json:"distance"`
 }
 
-type ForumTopicCreated struct{}
+type ForumTopicCreated struct {
+	Name                 string `json:"name"`
+	Icon_color           int    `json:"icon_color"`
+	Icon_custom_emoji_id string `json:"icon_custom_emoji_id,omitempty"`
+}
 
 type ForumTopicEdited struct{}
 
