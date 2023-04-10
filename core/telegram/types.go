@@ -433,7 +433,14 @@ type Venue struct {
 	Google_place_type string    `json:"google_place_type,omitempty"`
 }
 
-type Location struct{}
+type Location struct {
+	Longitude              float64 `json:"longitude"`
+	Latitude               float64 `json:"latitude"`
+	Horizontal_accuracy    float64 `json:"horizontal_accuracy,omitempty"`
+	Live_period            int     `json:"live_period,omitempty"`
+	Heading                int     `json:"heading,omitempty"`
+	Proximity_alert_radius int     `json:"proximity_alert_radius,omitempty"`
+}
 
 type Invoice struct{}
 
