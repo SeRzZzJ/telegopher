@@ -542,7 +542,10 @@ type VideoChatParticipantsInvited struct {
 	Users []*User `json:"users"`
 }
 
-type WebAppData struct{}
+type WebAppData struct {
+	Data        string `json:"data"`
+	Button_text string `json:"button_text"`
+}
 
 type InlineKeyboardMarkup struct{}
 
