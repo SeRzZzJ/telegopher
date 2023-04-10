@@ -377,7 +377,10 @@ type Contact struct {
 	Vcard        string `json:"vcard,omitempty"`
 }
 
-type Dice struct{}
+type Dice struct {
+	Emoji string `json:"emoji"`
+	Value int    `json:"value"`
+}
 
 type Game struct{}
 
