@@ -490,7 +490,12 @@ type EncryptedPassportElement struct {
 	Hash         string          `json:"hash"`
 }
 
-type PassportFile struct{}
+type PassportFile struct {
+	File_id        string `json:"file_id"`
+	File_unique_id string `json:"file_unique_id"`
+	File_size      string `json:"file_size"`
+	File_date      int    `json:"file_date"`
+}
 
 type EncryptedCredentials struct{}
 
