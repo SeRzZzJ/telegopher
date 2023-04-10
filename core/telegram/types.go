@@ -416,7 +416,12 @@ type File struct {
 	File_path      string `json:"file_path,omitempty"`
 }
 
-type MaskPosition struct{}
+type MaskPosition struct {
+	Point   string  `json:"point"`
+	X_shift float64 `json:"x_shift"`
+	Y_shift float64 `json:"y_shift"`
+	Scale   float64 `json:"scale"`
+}
 
 type Venue struct{}
 
