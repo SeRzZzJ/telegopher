@@ -472,7 +472,14 @@ type ChatShared struct {
 
 type WriteAccessAllowed struct{}
 
-type PassportData struct{}
+type PassportData struct {
+	Data        []*EncryptedPassportElement `json:"data"`
+	Credentials *EncryptedCredentials       `json:"credentials"`
+}
+
+type EncryptedPassportElement struct{}
+
+type EncryptedCredentials struct{}
 
 type ProximityAlertTriggered struct{}
 
