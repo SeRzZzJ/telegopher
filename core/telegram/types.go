@@ -391,7 +391,27 @@ type Game struct {
 	Animation     *Animation       `json:"animation,omitempty"`
 }
 
-type Sticker struct{}
+type Sticker struct {
+	File_id           string        `json:"file_id"`
+	File_unique_id    string        `json:"file_unique_id"`
+	Type              string        `json:"type"`
+	Width             int           `json:"width"`
+	Height            int           `json:"height"`
+	Is_animated       bool          `json:"is_animated"`
+	Is_video          bool          `json:"is_video"`
+	Thumbnail         *PhotoSize    `json:"thumbnail,omitempty"`
+	Emoji             string        `json:"emoji,omitempty"`
+	Set_name          string        `json:"set_name,omitempty"`
+	Premium_animation *File         `json:"premium_animation,omitempty"`
+	Mask_position     *MaskPosition `json:"mask_position,omitempty"`
+	Custom_emoji_id   string        `json:"custom_emoji_id,omitempty"`
+	Needs_repainting  bool          `json:"needs_repainting,omitempty"`
+	File_size         int           `json:"file_size,omitempty"`
+}
+
+type File struct{}
+
+type MaskPosition struct{}
 
 type Venue struct{}
 
