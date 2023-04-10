@@ -409,7 +409,12 @@ type Sticker struct {
 	File_size         int           `json:"file_size,omitempty"`
 }
 
-type File struct{}
+type File struct {
+	File_id        string `json:"file_id"`
+	File_unique_id string `json:"file_unique_id"`
+	File_size      int    `json:"file_size,omitempty"`
+	File_path      string `json:"file_path,omitempty"`
+}
 
 type MaskPosition struct{}
 
