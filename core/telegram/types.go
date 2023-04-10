@@ -528,7 +528,9 @@ type GeneralForumTopicHidden struct{}
 
 type GeneralForumTopicUnhidden struct{}
 
-type VideoChatScheduled struct{}
+type VideoChatScheduled struct {
+	Start_date int `json:"start_date"`
+}
 
 type VideoChatStarted struct{}
 
