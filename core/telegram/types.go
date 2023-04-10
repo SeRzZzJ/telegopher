@@ -503,7 +503,11 @@ type EncryptedCredentials struct {
 	Secret string `json:"secret"`
 }
 
-type ProximityAlertTriggered struct{}
+type ProximityAlertTriggered struct {
+	Traveler *User `json:"traveler"`
+	Watcher  *User `json:"watcher"`
+	Distance int   `json:"distance"`
+}
 
 type ForumTopicCreated struct{}
 
