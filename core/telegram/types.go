@@ -382,7 +382,14 @@ type Dice struct {
 	Value int    `json:"value"`
 }
 
-type Game struct{}
+type Game struct {
+	Title         string           `json:"title"`
+	Description   string           `json:"description"`
+	Photo         []*PhotoSize     `json:"photo"`
+	Text          string           `json:"text,omitempty"`
+	Text_Entities []*MessageEntity `json:"text_entities,omitempty"`
+	Animation     *Animation       `json:"animation,omitempty"`
+}
 
 type Sticker struct{}
 
