@@ -465,7 +465,10 @@ type UserShared struct {
 	User_id    int `json:"user_id"`
 }
 
-type ChatShared struct{}
+type ChatShared struct {
+	Request_id int `json:"request_id"`
+	Chat_id    int `json:"chat_id"`
+}
 
 type WriteAccessAllowed struct{}
 
