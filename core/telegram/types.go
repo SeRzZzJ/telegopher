@@ -551,7 +551,20 @@ type InlineKeyboardMarkup struct {
 	Inline_keyboard []*InlineKeyboardButton `json:"inline_keyboard"`
 }
 
-type InlineKeyboardButton struct{}
+type InlineKeyboardButton struct {
+	Text                             string      `json:"text"`
+	Url                              string      `json:"url,omitempty"`
+	Callback_data                    string      `json:"callback_data,omitempty"`
+	Web_app                          *WebAppInfo `json:"web_app,omitempty"`
+	Login_url                        *LoginUrl   `json:"login_url,omitempty"`
+	Switch_inline_query              string      `json:"switch_inline_query,omitempty"`
+	Switch_inline_query_current_chat string      `json:"switch_inline_query_current_chat,omitempty"`
+	Pay                              bool        `json:"pay,omitempty"`
+}
+
+type WebAppInfo struct{}
+
+type LoginUrl struct{}
 
 type ChatLocation struct{}
 
