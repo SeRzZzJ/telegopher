@@ -566,7 +566,12 @@ type WebAppInfo struct {
 	Url string `json:"url"`
 }
 
-type LoginUrl struct{}
+type LoginUrl struct {
+	Url                  string `json:"url"`
+	Forward_text         string `json:"forward_text,omitempty"`
+	Bot_username         string `json:"bot_username,omitempty"`
+	Request_write_access bool   `json:"request_write_access,omitempty"`
+}
 
 type ChatLocation struct{}
 
