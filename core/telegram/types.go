@@ -562,7 +562,9 @@ type InlineKeyboardButton struct {
 	Pay                              bool        `json:"pay,omitempty"`
 }
 
-type WebAppInfo struct{}
+type WebAppInfo struct {
+	Url string `json:"url"`
+}
 
 type LoginUrl struct{}
 
