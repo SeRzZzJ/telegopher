@@ -573,7 +573,10 @@ type LoginUrl struct {
 	Request_write_access bool   `json:"request_write_access,omitempty"`
 }
 
-type ChatLocation struct{}
+type ChatLocation struct {
+	Location *Location `json:"location"`
+	Address  string    `json:"address"`
+}
 
 type ChatPermissions struct{}
 
