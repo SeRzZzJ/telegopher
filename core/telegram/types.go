@@ -595,4 +595,9 @@ type ChatPermissions struct {
 	CanManageTopics       bool `json:"can_,omitempty"`
 }
 
-type ChatPhoto struct{}
+type ChatPhoto struct {
+	SmallFileId       string `json:"small_file_id"`
+	SmallFileUniqueId string `json:"small_file_unique_id"`
+	BigFileId         string `json:"big_file_id"`
+	BigFileUniqueId   string `json:"big_unique_id"`
+}
