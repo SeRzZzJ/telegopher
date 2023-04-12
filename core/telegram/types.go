@@ -601,3 +601,14 @@ type ChatPhoto struct {
 	BigFileId         string `json:"big_file_id"`
 	BigFileUniqueId   string `json:"big_unique_id"`
 }
+
+const (
+	typeFileId string = "fileId"
+	typeURL    string = "url"
+	typeFile   string = "file"
+)
+
+type InputFile struct {
+	TypeInputFile string
+	File          string
+}
