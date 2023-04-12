@@ -57,19 +57,9 @@ func (telegram *Telegram) GetUpdates(offset int,
 
 	err = json.Unmarshal(body, &res)
 	if err != nil {
-		fmt.Println("error:", err)
+		panic(err)
 	}
 
-	for _, result := range res.Result {
-		fmt.Println(result.Update_id)
-		fmt.Printf("%+v\n", result)
-		// switch message := result.Update.(type) {
-		// case Message:
-		// 	fmt.Println(message)
-		// default:
-		// 	fmt.Println("Це не Message ")
-		// }
-	}
 	return &res.Result
 }
 
