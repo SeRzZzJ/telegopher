@@ -144,6 +144,19 @@ type ResponseSetWebhook struct {
 	Result bool `json:"result"`
 }
 
+func (telegram *Telegram) DeleteWebhook(dropPendingUpdates bool) bool {
+	var (
+		data     map[string][]string = make(map[string][]string)
+		response *http.Response
+		err      error
+		res      ResponseSetWebhook
+	)
+	data["drop_pending_updates"] = []string{strconv.FormatBool(dropPendingUpdates)}
+	response, err = telegram.ApiCaller.PostCallApiData("deleteWebhook", data)
+	marshalResponse(response, err, &res)
+	return res.Result
+}
+
 func (telegram *Telegram) GetMe() *User {
 	//var response *http.Response
 	var err error
