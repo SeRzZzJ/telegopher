@@ -20,6 +20,24 @@ type Telegram struct {
 	ApiCaller *network.ApiCaller
 }
 
+func marshalResponse(response *http.Response, err error, res interface{}) {
+	var body []byte
+
+	if err != nil {
+		panic(err)
+	}
+
+	body, err = io.ReadAll(response.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	err = json.Unmarshal(body, res)
+	if err != nil {
+		panic(err)
+	}
+}
+
 func NewTelegram(token string) *Telegram {
 	const baseUrl string = "https://api.telegram.org"
 	const baseRoute string = "/bot"
@@ -65,6 +83,65 @@ func (telegram *Telegram) GetUpdates(offset int,
 
 type Response struct {
 	Result []Update `json:"result"`
+}
+
+func (telegram *Telegram) SetWebhook(url string, setWebhookOpts *SetWebhookOpts) bool {
+	var (
+		data     map[string][]string = make(map[string][]string)
+		response *http.Response
+		err      error
+		res      ResponseSetWebhook
+	)
+
+	data["url"] = []string{url}
+
+	if setWebhookOpts.IpAddress != nil {
+		data["ip_address"] = []string{*setWebhookOpts.IpAddress}
+	}
+
+	if setWebhookOpts.MaxConnections != nil {
+		data["max_connections"] = []string{strconv.Itoa(*setWebhookOpts.MaxConnections)}
+	}
+
+	if setWebhookOpts.AllowedUpdates != nil {
+		data["allowed_updates"] = []string{strings.Join(*setWebhookOpts.AllowedUpdates, ",")}
+	}
+
+	if setWebhookOpts.DropPendingUpdates != nil {
+		data["drop_pending_updates"] = []string{strconv.FormatBool(*setWebhookOpts.DropPendingUpdates)}
+	}
+
+	if setWebhookOpts.SecretToken != nil {
+		data["secret_token"] = []string{*setWebhookOpts.SecretToken}
+	}
+
+	if setWebhookOpts.Certificate != nil {
+		switch setWebhookOpts.Certificate.TypeInputFile {
+		case typeFile:
+			response, err = telegram.ApiCaller.PostCallApiFile("setWebhook", data, "certificate", setWebhookOpts.Certificate.File)
+			marshalResponse(response, err, &res)
+			return res.Result
+		default:
+			data["certificate"] = []string{setWebhookOpts.Certificate.File}
+		}
+	}
+	response, err = telegram.ApiCaller.PostCallApiData("setWebhook", data)
+	marshalResponse(response, err, &res)
+	return res.Result
+}
+
+type SetWebhookOpts struct {
+	Certificate        *InputFile
+	IpAddress          *string
+	MaxConnections     *int
+	AllowedUpdates     *AllowedUpdates
+	DropPendingUpdates *bool
+	SecretToken        *string
+}
+
+type ResponseSetWebhook struct {
+	Error
+	Result bool `json:"result"`
 }
 
 func (telegram *Telegram) GetMe() *User {

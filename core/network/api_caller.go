@@ -2,7 +2,6 @@ package network
 
 import (
 	"bytes"
-	"encoding/json"
 	"io"
 	"mime/multipart"
 	"net/http"
@@ -41,8 +40,6 @@ func getRequest(url string) (*http.Response, error) {
 	var response *http.Response
 	var err error
 	response, err = http.Get(url)
-
-	// fmt.Println(response.Body)
 	return response, err
 }
 
@@ -61,9 +58,9 @@ func (apiCaller *ApiCaller) PostCallApiData(method string, data map[string][]str
 func (apiCaller *ApiCaller) PostCallApiFile(
 	method string,
 	data map[string][]string,
-	fileName string,
+	fieldFileName string,
 	path string,
-) (*json.Decoder, error) {
+) (*http.Response, error) {
 	var file *os.File
 	file, _ = os.Open(path)
 	defer file.Close()
@@ -72,24 +69,11 @@ func (apiCaller *ApiCaller) PostCallApiFile(
 	for key, value := range data {
 		writer.WriteField(key, value[0])
 	}
-	part, _ := writer.CreateFormFile("file", "file.txt")
+	part, _ := writer.CreateFormFile(fieldFileName, file.Name())
 	io.Copy(part, file)
 	writer.Close()
 	var response *http.Response
 	var err error
 	response, err = http.Post(method, writer.FormDataContentType(), body)
-	return json.NewDecoder(response.Body), err
+	return response, err
 }
-
-// func postDataRequest(url string, data map[string][]string) (interface{}, error) {
-// 	var response *http.Response
-// 	var err error
-// 	var params Url.Values = Url.Values{}
-// 	var counter int = 0
-// 	for key, value := range data {
-// 		params.Add(key, value[counter])
-// 		counter++
-// 	}
-// 	response, err = http.Post(url, "application/x-www-form-urlencoded", strings.NewReader(params.Encode()))
-// 	return response, err
-// }
