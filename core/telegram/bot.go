@@ -158,15 +158,19 @@ func (telegram *Telegram) DeleteWebhook(dropPendingUpdates bool) bool {
 }
 
 func (telegram *Telegram) GetMe() *User {
-	//var response *http.Response
-	var err error
-	_, err = telegram.ApiCaller.GetNonParamsCallApi("getMe")
-	if err != nil {
-		panic(err)
-	}
-	var botInfo *User
-	//response.Decoder(&botInfo)
-	return botInfo
+	var (
+		response *http.Response
+		err      error
+		res      ResponseGetMe
+	)
+	response, err = telegram.ApiCaller.GetNonParamsCallApi("getMe")
+	marshalResponse(response, err, &res)
+	return &res.Result
+}
+
+type ResponseGetMe struct {
+	Error
+	Result User `json:"result"`
 }
 
 func (telegram *Telegram) SendMessage(chat_id int, text string, option struct{}) *Message {
