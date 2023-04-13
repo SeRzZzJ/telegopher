@@ -612,3 +612,9 @@ type InputFile struct {
 	TypeInputFile string
 	File          string
 }
+
+type Error struct {
+	Ok          bool   `json:"ok"`
+	ErrorCode   int    `json:"error_code,omitempty"`
+	Description string `json:"description,omitempty"`
+}
