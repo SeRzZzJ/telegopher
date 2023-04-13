@@ -58,14 +58,20 @@ func (apiCaller *ApiCaller) PostCallApiData(method string, data map[string][]str
 	return response, err
 }
 
-func (apiCaller *ApiCaller) PostCallApiFile(method string, path string) (*json.Decoder, error) {
+func (apiCaller *ApiCaller) PostCallApiFile(
+	method string,
+	data map[string][]string,
+	fileName string,
+	path string,
+) (*json.Decoder, error) {
 	var file *os.File
 	file, _ = os.Open(path)
-
 	defer file.Close()
-
 	var body *bytes.Buffer = &bytes.Buffer{}
 	var writer *multipart.Writer = multipart.NewWriter(body)
+	for key, value := range data {
+		writer.WriteField(key, value[0])
+	}
 	part, _ := writer.CreateFormFile("file", "file.txt")
 	io.Copy(part, file)
 	writer.Close()
