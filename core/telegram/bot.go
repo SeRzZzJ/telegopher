@@ -2,6 +2,7 @@ package telegram
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -22,7 +23,7 @@ type Telegram struct {
 
 func marshalResponse(response *http.Response, err error, res interface{}) {
 	var body []byte
-
+	var tgError Error
 	if err != nil {
 		panic(err)
 	}
@@ -35,6 +36,15 @@ func marshalResponse(response *http.Response, err error, res interface{}) {
 	err = json.Unmarshal(body, res)
 	if err != nil {
 		panic(err)
+	}
+
+	err = json.Unmarshal(body, &tgError)
+	if err != nil {
+		panic(err)
+	}
+
+	if !tgError.Ok {
+		panic(errors.New(strings.Join([]string{"Telegram", tgError.Description, strconv.Itoa(tgError.ErrorCode)}, " ")))
 	}
 }
 
