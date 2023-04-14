@@ -21,7 +21,7 @@ type Telegram struct {
 	ApiCaller *network.ApiCaller
 }
 
-func marshalResponse(response *http.Response, err error, res interface{}) {
+func unmarshalResponse(response *http.Response, err error, res interface{}) {
 	var body []byte
 	var tgError Error
 	if err != nil {
@@ -59,40 +59,30 @@ func NewTelegram(token string) *Telegram {
 	}
 }
 
-func (telegram *Telegram) GetUpdates(offset int,
+func (telegram *Telegram) GetUpdates(
+	offset int,
 	limit int,
 	timeout int,
-	allowed_updates AllowedUpdates) *[]Update {
+	allowed_updates AllowedUpdates,
+) *[]Update {
 	var (
-		response *http.Response
-		err      error
-		body     []byte
-		res      Response
+		response  *http.Response
+		err       error
+		unmurshal struct {
+			Result []Update `json:"result"`
+		}
 	)
 
-	response, err = telegram.ApiCaller.GetParamsCallApi("getUpdates", map[string]string{"offset": strconv.Itoa(offset),
+	response, err = telegram.ApiCaller.GetParamsCallApi("getUpdates", map[string]string{
+		"offset":          strconv.Itoa(offset),
 		"limit":           strconv.Itoa(limit),
 		"timeout":         strconv.Itoa(timeout),
-		"allowed_updates": "[\"" + strings.Join(allowed_updates, "\",\"") + "\"]"})
-	if err != nil {
-		panic(err)
-	}
+		"allowed_updates": "[\"" + strings.Join(allowed_updates, "\",\"") + "\"]",
+	})
 
-	body, err = io.ReadAll(response.Body)
-	if err != nil {
-		panic(err)
-	}
+	unmarshalResponse(response, err, unmurshal)
 
-	err = json.Unmarshal(body, &res)
-	if err != nil {
-		panic(err)
-	}
-
-	return &res.Result
-}
-
-type Response struct {
-	Result []Update `json:"result"`
+	return &unmurshal.Result
 }
 
 func (telegram *Telegram) SetWebhook(url string, setWebhookOpts *SetWebhookOpts) bool {
@@ -129,14 +119,14 @@ func (telegram *Telegram) SetWebhook(url string, setWebhookOpts *SetWebhookOpts)
 		switch setWebhookOpts.Certificate.TypeInputFile {
 		case typeFile:
 			response, err = telegram.ApiCaller.PostCallApiFile("setWebhook", data, "certificate", setWebhookOpts.Certificate.File)
-			marshalResponse(response, err, &res)
+			unmarshalResponse(response, err, &res)
 			return res.Result
 		default:
 			data["certificate"] = []string{setWebhookOpts.Certificate.File}
 		}
 	}
 	response, err = telegram.ApiCaller.PostCallApiData("setWebhook", data)
-	marshalResponse(response, err, &res)
+	unmarshalResponse(response, err, &res)
 	return res.Result
 }
 
@@ -163,7 +153,7 @@ func (telegram *Telegram) DeleteWebhook(dropPendingUpdates bool) bool {
 	)
 	data["drop_pending_updates"] = []string{strconv.FormatBool(dropPendingUpdates)}
 	response, err = telegram.ApiCaller.PostCallApiData("deleteWebhook", data)
-	marshalResponse(response, err, &res)
+	unmarshalResponse(response, err, &res)
 	return res.Result
 }
 
@@ -176,7 +166,7 @@ func (telegram *Telegram) GetWebhookInfo() *WebhookInfo {
 		}
 	)
 	response, err = telegram.ApiCaller.GetNonParamsCallApi("getWebhookInfo")
-	marshalResponse(response, err, &res)
+	unmarshalResponse(response, err, &res)
 	return &res.Result
 }
 
@@ -187,7 +177,7 @@ func (telegram *Telegram) GetMe() *User {
 		res      ResponseGetMe
 	)
 	response, err = telegram.ApiCaller.GetNonParamsCallApi("getMe")
-	marshalResponse(response, err, &res)
+	unmarshalResponse(response, err, &res)
 	return &res.Result
 }
 
