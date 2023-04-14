@@ -21,7 +21,18 @@ type Telegram struct {
 	ApiCaller *network.ApiCaller
 }
 
-func unmarshalResponse(response *http.Response, err error, res interface{}) {
+func NewTelegram(token string) *Telegram {
+	const baseUrl string = "https://api.telegram.org"
+	const baseRoute string = "/bot"
+	return &Telegram{
+		BaseUrl:   baseUrl,
+		BaseRoute: baseRoute,
+		Token:     token,
+		ApiCaller: network.NewApiCaller(baseUrl + baseRoute + token),
+	}
+}
+
+func unmarshalResponse(response *http.Response, err error, unmarshal interface{}) {
 	var body []byte
 	var tgError Error
 	if err != nil {
@@ -33,7 +44,7 @@ func unmarshalResponse(response *http.Response, err error, res interface{}) {
 		panic(err)
 	}
 
-	err = json.Unmarshal(body, res)
+	err = json.Unmarshal(body, unmarshal)
 	if err != nil {
 		panic(err)
 	}
@@ -44,18 +55,7 @@ func unmarshalResponse(response *http.Response, err error, res interface{}) {
 	}
 
 	if !tgError.Ok {
-		panic(errors.New(strings.Join([]string{"Telegram", tgError.Description, strconv.Itoa(tgError.ErrorCode)}, " ")))
-	}
-}
-
-func NewTelegram(token string) *Telegram {
-	const baseUrl string = "https://api.telegram.org"
-	const baseRoute string = "/bot"
-	return &Telegram{
-		BaseUrl:   baseUrl,
-		BaseRoute: baseRoute,
-		Token:     token,
-		ApiCaller: network.NewApiCaller(baseUrl + baseRoute + token),
+		panic(errors.New(strings.Join([]string{"Telegram:", strconv.Itoa(tgError.ErrorCode), tgError.Description}, " ")))
 	}
 }
 
@@ -90,7 +90,9 @@ func (telegram *Telegram) SetWebhook(url string, setWebhookOpts *SetWebhookOpts)
 		data     map[string][]string = make(map[string][]string)
 		response *http.Response
 		err      error
-		res      ResponseSetWebhook
+		res      struct {
+			Result bool `json:"result"`
+		}
 	)
 
 	data["url"] = []string{url}
@@ -139,17 +141,14 @@ type SetWebhookOpts struct {
 	SecretToken        *string
 }
 
-type ResponseSetWebhook struct {
-	Error
-	Result bool `json:"result"`
-}
-
 func (telegram *Telegram) DeleteWebhook(dropPendingUpdates bool) bool {
 	var (
 		data     map[string][]string = make(map[string][]string)
 		response *http.Response
 		err      error
-		res      ResponseSetWebhook
+		res      struct {
+			Result bool `json:"result"`
+		}
 	)
 	data["drop_pending_updates"] = []string{strconv.FormatBool(dropPendingUpdates)}
 	response, err = telegram.ApiCaller.PostCallApiData("deleteWebhook", data)
@@ -174,16 +173,13 @@ func (telegram *Telegram) GetMe() *User {
 	var (
 		response *http.Response
 		err      error
-		res      ResponseGetMe
+		res      struct {
+			Result User `json:"result"`
+		}
 	)
 	response, err = telegram.ApiCaller.GetNonParamsCallApi("getMe")
 	unmarshalResponse(response, err, &res)
 	return &res.Result
-}
-
-type ResponseGetMe struct {
-	Error
-	Result User `json:"result"`
 }
 
 func (telegram *Telegram) SendMessage(chat_id int, text string, option struct{}) *Message {
@@ -211,54 +207,3 @@ func (telegram *Telegram) SendMessage(chat_id int, text string, option struct{})
 	}
 	return &res
 }
-
-//	struct {
-//		message,
-//		edited_message,
-//		channel_post,
-//		edited_channel_post,
-//		inline_query,
-//		chosen_inline_result,
-//		callback_query,
-//		shipping_query,
-//		pre_checkout_query,
-//		poll,
-//		my_chat_member,
-//		chat_member,
-//		chat_join_request bool
-//	}
-// func NewAllowedUpdates(message bool,
-// 	edited_message bool,
-// 	channel_post bool,
-// 	edited_channel_post bool,
-// 	inline_query bool,
-// 	chosen_inline_result bool,
-// 	callback_query bool,
-// 	shipping_query bool,
-// 	pre_checkout_query bool,
-// 	poll bool,
-// 	my_chat_member bool,
-// 	chat_member bool,
-// 	chat_join_request bool) *AllowedUpdates {
-// 	return &AllowedUpdates{message: message,
-// 		edited_message:       edited_message,
-// 		channel_post:         channel_post,
-// 		edited_channel_post:  edited_channel_post,
-// 		inline_query:         inline_query,
-// 		chosen_inline_result: chosen_inline_result,
-// 		callback_query:       callback_query,
-// 		shipping_query:       shipping_query,
-// 		pre_checkout_query:   pre_checkout_query,
-// 		poll:                 poll,
-// 		my_chat_member:       my_chat_member,
-// 		chat_member:          chat_member,
-// 		chat_join_request:    chat_join_request}
-// }
-
-// func (allowed_updates *AllowedUpdates) getAllowedUpdates() []string {
-// 	var allowed_updates_array []string
-// 	for _, value := range allowed_updates {
-// 		allowed_updates_array = append(allowed_updates_array[:], value)
-// 	}
-// 	return allowed_updates_array
-// }
