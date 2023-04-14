@@ -621,8 +621,8 @@ type Error struct {
 
 type WebhookInfo struct {
 	Url                          string          `json:"url"`
-	HasCustomCertificate         *bool           `json:"has_custom_certificate,omitempty"`
-	PendingUpdateCount           *int            `json:"pending_update_count,omitempty"`
+	HasCustomCertificate         bool            `json:"has_custom_certificate"`
+	PendingUpdateCount           int             `json:"pending_update_count"`
 	IpAddress                    *string         `json:"ip_address,omitempty"`
 	LastErrorDate                *int            `json:"last_error_date,omitempty"`
 	LastErrorMessage             *string         `json:"last_error_message,omitempty"`

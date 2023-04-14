@@ -12,7 +12,7 @@ func main() {
 	//var apiCaller telegopher.ApiCaller = *telegopher.NewApiCaller("https://api.telegram.org/bot/")
 	//fmt.Println(apiCaller.GetNonParamsCallApi("getMe"))
 	// var bot telegram.Telegram = *telegram.NewTelegram(token)
-	// bot.SetWebhook("", &telegram.SetWebhookOpts{})
+	// bot.GetWebhookInfo()
 
 	//fmt.Printf("%+v\n", bot.GetMe())
 	// var bot telegopher.Telegopher = *telegopher.NewTelegopher(token)

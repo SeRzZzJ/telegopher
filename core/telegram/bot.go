@@ -157,6 +157,19 @@ func (telegram *Telegram) DeleteWebhook(dropPendingUpdates bool) bool {
 	return res.Result
 }
 
+func (telegram *Telegram) GetWebhookInfo() *WebhookInfo {
+	var (
+		response *http.Response
+		err      error
+		res      struct {
+			Result WebhookInfo `json:"result"`
+		}
+	)
+	response, err = telegram.ApiCaller.GetNonParamsCallApi("getWebhookInfo")
+	marshalResponse(response, err, &res)
+	return &res.Result
+}
+
 func (telegram *Telegram) GetMe() *User {
 	var (
 		response *http.Response
