@@ -181,6 +181,7 @@ func (telegram *Telegram) GetMe() *User {
 	unmarshalResponse(response, err, &res)
 	return &res.Result
 }
+
 func (telegram *Telegram) LogOut() bool {
 	var (
 		response *http.Response
@@ -190,6 +191,19 @@ func (telegram *Telegram) LogOut() bool {
 		}
 	)
 	response, err = telegram.ApiCaller.GetNonParamsCallApi("logOut")
+	unmarshalResponse(response, err, &res)
+	return res.Result
+}
+
+func (telegram *Telegram) Close() bool {
+	var (
+		response *http.Response
+		err      error
+		res      struct {
+			Result bool `json:"result"`
+		}
+	)
+	response, err = telegram.ApiCaller.GetNonParamsCallApi("close")
 	unmarshalResponse(response, err, &res)
 	return res.Result
 }
