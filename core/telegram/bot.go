@@ -19,9 +19,14 @@ type Telegram struct {
 	BaseRoute string
 	Token     string
 	ApiCaller *network.ApiCaller
+	tgOpts    *TelegramOpts
 }
 
-func NewTelegram(token string) *Telegram {
+type TelegramOpts struct {
+	ParseMode string
+}
+
+func NewTelegram(token string, tgOpts *TelegramOpts) *Telegram {
 	const baseUrl string = "https://api.telegram.org"
 	const baseRoute string = "/bot"
 	return &Telegram{
@@ -29,6 +34,7 @@ func NewTelegram(token string) *Telegram {
 		BaseRoute: baseRoute,
 		Token:     token,
 		ApiCaller: network.NewApiCaller(baseUrl + baseRoute + token),
+		tgOpts:    tgOpts,
 	}
 }
 

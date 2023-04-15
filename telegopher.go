@@ -11,8 +11,8 @@ type Telegopher struct {
 	//middlewares []func()
 }
 
-func NewTelegopher(token string) *Telegopher {
-	return &Telegopher{telegram: telegram.NewTelegram(token)}
+func NewTelegopher(token string, tgOpts *telegram.TelegramOpts) *Telegopher {
+	return &Telegopher{telegram: telegram.NewTelegram(token, tgOpts)}
 }
 
 func (telegopher *Telegopher) UseMiddleware() {
